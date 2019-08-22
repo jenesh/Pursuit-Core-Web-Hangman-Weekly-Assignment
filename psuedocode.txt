@@ -1,0 +1,22 @@
+Hangman Game
+
+Webpage
+    - Heading
+        - Title of game
+    - Main game screen
+        - Left side graphical display
+        - Right side display of word/phrase progress and a letter bank to choose from 
+    - Footer/Bottom
+        - Help/Hint menu
+
+JavaScript
+1) User is asked for single player/multiplayer
+2) Displays the corresponding form based on user choice
+3) Class called game that initilizes using the user input
+    - Chooses random word
+    - 
+
+
+DS => Split array => Obj that keeps track of index #
+To check for letter check Obj and loop through array indexs with the corresponding letter that chnages display to show.
+If there is no letter in the Alphabet object then key => -1
