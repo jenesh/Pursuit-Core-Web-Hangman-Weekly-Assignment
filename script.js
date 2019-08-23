@@ -13,14 +13,15 @@ const inputForm = document.querySelector('#input-form');
 const inputLtr = document.querySelector('#input-ltr');
 const buttonSub = document.querySelector('#button-sub');
 // Choice of words
-const words = ['hello', 'goodbye'];
+const words = ['hello world', 'goodbye'];
 // Class for an instance of Hangman
 class Hangman {
-    constructor(word) {
-        this.word = word;
+    constructor(words) {
+        this.words = words;
     }
-    wordArray() {
-        return this.word.split('');
+    phraseArray() {
+        const wordsArr = this.words.split(' ');
+        return wordsArr.map(ele => ele.split(''));
     }
     letterObj() {
         const obj = {};
@@ -30,30 +31,38 @@ class Hangman {
             obj[ele] = [];
         });
         // console.log(obj);
-        const word = this.wordArray();
-        for (let i = 0; i < word.length; i++) {
-            obj[word[i]].push(i);
-        }
-        // console.log(obj);
+        const words = this.phraseArray();
+        console.log(words);
+        words.forEach(ele => {
+            for (let i = 0; i < ele.length; i++) {
+                obj[ele[i]].push(i);
+            }
+        })
+        console.log(obj);
         return obj;
     }
 }
 // Initilizing an instance
 let player = new Hangman(words[0]);
-const currSplitWord = player.wordArray();
+const currSplitWord = player.phraseArray();
 const currLetterObj = player.letterObj();
 // console.log(player);
 // console.log(player.wordArray());
-// console.log(currSplitWord)
+console.log(currSplitWord);
 console.log(currLetterObj);
+// For each letter in the word array it creates a div and then places span tags
+// inside of that div so it can support multiple words
 
-currSplitWord.forEach(ele => {
-    const spanLetter = document.createElement('span');
-    spanLetter.innerHTML = ele;
-    spanLetter.setAttribute('data-ltr' , `${ele}`);
-    spanLetter.classList.add('span-spacing');
-    spanLetter.classList.add('hide');
-    displayWord.appendChild(spanLetter);
+currSplitWord.forEach(words => {
+    words.forEach(char => {
+        const spanLetter = document.createElement('span');
+        spanLetter.innerHTML = char;
+        spanLetter.setAttribute('data-ltr', `${char}`);
+        spanLetter.classList.add('span-spacing');
+        spanLetter.classList.add('hide'); // Initially it doens't appear 
+        displayWord.appendChild(spanLetter);
+    })
+    
 });
 
 const checkLetter = () => {
@@ -67,14 +76,3 @@ const checkLetter = () => {
 
 // All event listeners
 buttonSub.addEventListener('click', checkLetter);
-
-
-
-
-
-
-
-
-
-
-
