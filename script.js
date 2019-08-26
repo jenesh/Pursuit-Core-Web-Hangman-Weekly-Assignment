@@ -1,3 +1,4 @@
+const root = document.querySelector('#root');
 // Parent div's of #root
 const header = document.querySelector('#header');
 const main = document.querySelector('#main');
@@ -74,8 +75,8 @@ console.log('Display Word Div: \n', displayWord)
 // All span tags which are in sync with the phraseArr
 const spanTags = document.querySelectorAll('span');
 // Check user letter input and give error if Checking no input
-const checkLetter = () => {
-    const ltr = inputLtr.value.toUpperCase();
+const checkLetter = (char = inputLtr.value.toUpperCase()) => {
+    const ltr = char;
     let error = false;
     if (player.ltrUsed.includes(ltr)) {
         inputLtr.placeholder = 'Letter already used!';
@@ -85,7 +86,8 @@ const checkLetter = () => {
         inputLtr.value = '';
         matchCount = 0;
         currLetterObj[ltr].forEach(ele => {
-            spanTags[ele].style.color = 'red';
+            spanTags[ele].style.color = 'black';
+            spanTags[ele].style.boxShadow = 'none';
             player.ltrCount--;
             matchCount++;
         });
@@ -113,9 +115,17 @@ console.log(spanTags[0].textContent);
 console.log(player.lives)
 // console.log(player.ltrCount)
 // All event listeners
-buttonSub.addEventListener('click', checkLetter);
+// buttonSub.addEventListener('click', checkLetter);
+
 inputLtr.addEventListener('keydown', (e) => {
+    e.stopImmediatePropagation();
     if (e.keyCode === 13) {
         checkLetter();
     }
 });
+
+window.addEventListener('keydown', (e) => {
+    if (e.keyCode >= 65 && e.keyCode <= 90) {
+        checkLetter(e.key.toUpperCase());
+    }
+})

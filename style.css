@@ -1,14 +1,15 @@
-* {
+{
     border: 1px solid navy;
 }
 html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* overflow: hidden; */
-    /* width: 100%;
-    height: 100%; */
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-size: 1.5rem;
 }
 #root {
     height: 90vh;
@@ -17,16 +18,18 @@ html, body {
 }
 #header {
     color: rgb(106, 93, 223);
-    height: 100px;
+    height: auto;
     background: rgb(252, 249, 108);
     margin: 0;
     padding: 0;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 #main {
     background: rgb(209, 160, 55);
     display: flex;
-    height: calc(100% - 100px);
+    height: calc(100% - 30%);
 }
 #left-screen {
     width: 50%;
@@ -35,6 +38,8 @@ html, body {
 #right-screen {
     width: 50%;
     background: rgb(33, 198, 248);
+    display: block;
+    text-align: center;
 }
 #display-word {
     height: 30%;
@@ -42,6 +47,7 @@ html, body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 #display-letters {
     height: 50%;
@@ -62,8 +68,23 @@ html, body {
     /* width: fit-content; */
 }
 .hide {
-    display: none;
+    color: rgb(33, 198, 248);
 }
 .show {
     display: block;
+} 
+span {
+    /* box-shadow: 0px 1px 0px 0px black; */
+    box-shadow: 0 8px 5px -6px black;
+    margin: 1px;
+}
+input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    text-align: center;
+}
+input:hover {
+    box-shadow: 0 0 1px 5px gray;
 }
