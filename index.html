@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     }
     </style>  -->
 </head>
+
 <body>
     <div id="root">
         <div id="header">
@@ -19,7 +21,7 @@
         </div>
         <div id="main">
             <div id="left-screen">
-                
+
             </div>
             <div id="right-screen">
                 <div id="display-word"></div>
@@ -27,12 +29,18 @@
                 <div id="input-form">
                     <input type="text" id="input-ltr" placeholder="Solve it all here!">
                     <!-- <button id="button-sub">Check</button> -->
-                    <p id="p-error" style= 'display: none';>Enter a letter! Or solve the whole puzzle!</p>
+                    <p id="p-error">Enter a letter! Or solve the whole puzzle!</p>
                 </div>
+            </div>
+            <div id="restart-div">
+                <button id="restart-btn">Restart</button>
             </div>
         </div>
         <div id="footer"></div>
     </div>
-    <script src="script.js"></script>
+
+    <script src="bundle.js"></script>
+    <!-- <script src="script.js"></script> -->
 </body>
+
 </html>
