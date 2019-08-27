@@ -104,7 +104,7 @@ function start(newHangman) {
         spanLetter.classList.add('hide'); // Initially it doens't appear
         displayWord.appendChild(spanLetter);
     });
-    console.log('Display Word Div: \n', displayWord)
+    // console.log('Display Word Div: \n', displayWord)
 
     // All span tags which are in sync with the phraseArr
     const spanTags = document.querySelectorAll('span');
@@ -120,8 +120,9 @@ function start(newHangman) {
                     spanTags[i].style.color = 'black';
                     spanTags[i].style.boxShadow = 'none';
                 }
-                return;
             }
+            player.winOrLose() ? inputLtr.placeholder = 'Congrats!':inputLtr.placeholder = 'That\'s not it';
+
         }
         if (player.ltrUsed.includes(ltr)) {
             inputLtr.placeholder = 'Letter already used!';
@@ -143,19 +144,11 @@ function start(newHangman) {
 
             if (!matchCount) {
                 if (player.winOrLose()) {
-                    inputLtr.removeEventListener('keydown', (e) => {
-                        e.stopImmediatePropagation();
-                        if (e.keyCode === 13) {
-                            checkLetter();
-                        }
-                    });
-
-                    window.removeEventListener('keydown', (e) => {
-                        if (e.keyCode >= 65 && e.keyCode <= 90) {
-                            checkLetter(e.key.toUpperCase());
-                        }
-                    })
-                    return;
+                    inputLtr.removeEventListener('keydown', inputKeyDown);
+                    window.removeEventListener('keydown', windowKeyDown);
+                    restartDiv.style.display = "block";
+                } else {
+                    inputLtr.placeholder = 'Sorry';
                 };
                 player.lives--;
                 inputLtr.placeholder = `Sorry, no ${ltr}!`;
@@ -173,9 +166,8 @@ function start(newHangman) {
         }
         if (player.winOrLose()) {
             inputLtr.removeEventListener('keydown', inputKeyDown);
-
             window.removeEventListener('keydown', windowKeyDown);
-            return;
+            restartDiv.style.display = "block";
         };
     }
 

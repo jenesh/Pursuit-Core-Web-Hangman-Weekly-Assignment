@@ -3178,11 +3178,11 @@ class Hangman {
     letterObj() {
         const obj = {};
         const alphabetArr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-        // console.log('Alphabet Array: ', alphabetArr);
+        
         alphabetArr.forEach(ele => {
             obj[ele] = [];
         });
-        // console.log('Object with keys a-z: ', obj);
+
         const words = this.phraseArray();
         console.log('Array of current phrase: \n', words);
         for (let i = 0; i < words.length; i++) {
@@ -3266,7 +3266,7 @@ function start(newHangman) {
         spanLetter.classList.add('hide'); // Initially it doens't appear
         displayWord.appendChild(spanLetter);
     });
-    console.log('Display Word Div: \n', displayWord)
+    // console.log('Display Word Div: \n', displayWord)
 
     // All span tags which are in sync with the phraseArr
     const spanTags = document.querySelectorAll('span');
@@ -3275,7 +3275,6 @@ function start(newHangman) {
     const checkLetter = (char = inputLtr.value.toUpperCase()) => {
         const ltr = char;
         let error = false;
-        // console.log(player.words.length, ltr.length);
 
         if (player.words.length === ltr.length) {
             if (player.words === ltr) {
@@ -3283,8 +3282,9 @@ function start(newHangman) {
                     spanTags[i].style.color = 'black';
                     spanTags[i].style.boxShadow = 'none';
                 }
-                return;
             }
+            player.winOrLose() ? inputLtr.placeholder = 'Congrats!':inputLtr.placeholder = 'That\'s not it';
+
         }
         if (player.ltrUsed.includes(ltr)) {
             inputLtr.placeholder = 'Letter already used!';
@@ -3303,30 +3303,22 @@ function start(newHangman) {
 
             });
             inputLtr.placeholder = `Great Guess! => ${matchCount} ${ltr}`;
+
             if (!matchCount) {
                 if (player.winOrLose()) {
-                    inputLtr.removeEventListener('keydown', (e) => {
-                        e.stopImmediatePropagation();
-                        if (e.keyCode === 13) {
-                            checkLetter();
-                        }
-                    });
-
-                    window.removeEventListener('keydown', (e) => {
-                        if (e.keyCode >= 65 && e.keyCode <= 90) {
-                            checkLetter(e.key.toUpperCase());
-                        }
-                    })
-                    return;
+                    inputLtr.removeEventListener('keydown', inputKeyDown);
+                    window.removeEventListener('keydown', windowKeyDown);
+                    restartDiv.style.display = "block";
+                } else {
+                    inputLtr.placeholder = 'Sorry';
                 };
                 player.lives--;
                 inputLtr.placeholder = `Sorry, no ${ltr}!`;
             }
+
             pError.style.display = 'none';
             error = false;
-            // console.log(currLetterObj[ltr]);
-            // console.log(player.lives)
-            // console.log(player.ltrUsed)
+
         } else {
             error = true;
         }
@@ -3336,11 +3328,11 @@ function start(newHangman) {
         }
         if (player.winOrLose()) {
             inputLtr.removeEventListener('keydown', inputKeyDown);
-
             window.removeEventListener('keydown', windowKeyDown);
-            return;
+            restartDiv.style.display = "block";
+        } else {
+            inputLtr.placeholder = 'Sorry, Game Over!';
         };
-
     }
 
     function inputKeyDown(e) {
@@ -3354,7 +3346,6 @@ function start(newHangman) {
         if (e.keyCode >= 65 && e.keyCode <= 90) {
             checkLetter(e.key.toUpperCase());
         }
-
     }
 
     restartBtn.addEventListener('click', () => {
