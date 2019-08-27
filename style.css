@@ -50,6 +50,12 @@ html, body {
     height: 50%;
     margin: 5px;
     border: 1px solid black;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    /* grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(7, 1fr); */
+    justify-content: center;
 }
 #input-form {
     height: 10%;
@@ -133,3 +139,26 @@ input:hover {
     text-shadow: -1px 1px 3px gray;
 }
 /* #restart-btn: */
+.letters {
+    margin: 10px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 70px;
+    width: 70px;
+    transition: all .4s ease;
+    background-color: white;
+    box-shadow: none;
+    border-radius: 20%;
+}
+.letters:hover {
+    /* transform: scale(1.04); */
+    transition: all .5s ease;
+    border-radius: 40%;
+    box-shadow: 0 0 10px 1px green;
+    
+}
+.letters:active{
+    transform: scale(.98);
+    transition: all .4s ease;
+}

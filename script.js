@@ -1,6 +1,9 @@
 // Choice of words
 const words = ['amuse', 'lazy', 'steam', 'ugly', 'scent', 'separate', 'vast', 'quiver', 'average', 'seashore', 'pray', 'descriptive', 'grumpy', 'knot', 'reaction', 'voiceless', 'carve', 'front', 'ground', 'evanescent', 'reason', 'judicious', 'earthquake', 'desert', 'educated', 'distance', 'waiting', 'trucks', 'scatter', 'chop', 'annoying', 'puzzling', 'close', 'animated', 'elbow', 'fretful', 'towering', 'satisfying', 'momentous', 'sore', 'animal', 'puzzled', 'fair', 'windy', 'quickest', 'stocking', 'wobble', 'beg', 'craven', 'border', 'round', 'moan', 'reproduce', 'stormy', 'unnatural', 'table', 'brother', 'violet', 'appreciate', 'overjoyed', 'actor', 'rightful', 'feeling', 'somber', 'safe', 'form', 'brief', 'crazy', 'cows', 'found', 'cattle', 'dynamic', 'majestic', 'contain', 'week', 'magical', 'gullible', 'adamant', 'file', 'cobweb', 'best', 'assorted', 'tasteful', 'nippy', 'secret', 'flavor', 'match', 'magic', 'few', 'different', 'ajar', 'idea', 'settle', 'plain', 'oatmeal', 'humdrum', 'romantic', 'bolt', 'juicy', 'obsequious', 'awake', 'robin', 'observe', 'mundane', 'mute', 'mighty', 'worried', 'chalk', 'strong', 'metal', 'manage', 'aboard', 'extend', 'verse', 'icicle', 'sharp', 'illegal', 'drip', 'lewd', 'perfect', 'shocking', 'branch', 'hot', 'polite', 'calculate', 'park', 'mate', 'handle', 'planes', 'rough', 'rabbit', 'belong', 'office', 'protect', 'free', 'driving', 'toothpaste', 'chubby', 'tall', 'loutish', 'shake', 'imported', 'hungry', 'camera', 'puny', 'building', 'present', 'rock', 'cycle', 'impress', 'vigorous', 'ready', 'card', 'argue', 'clam', 'scarce', 'person', 'wiry', 'guide', 'include', 'thankful', 'adorable', 'arch', 'sincere', 'earthy', 'elfin', 'silent', 'disarm', 'wish', 'unpack', 'honey', 'chunky', 'suspend', 'mature', 'needy', 'omniscient', 'devilish', 'tree', 'grass', 'narrow', 'pizzas', 'design', 'ragged', 'sheet', 'needle', 'rot', 'ticket', 'ship', 'fill', 'rule', 'lame', 'heal', 'greet', 'temper', 'gamy', 'quiet', 'trap', 'rhetorical', 'wing', 'dead'];
 // Class for an instance of Hangman
+
+const inputLtr = document.querySelector('#input-ltr');
+
 class Hangman {
     constructor(words) {
         this.words = words;
@@ -32,10 +35,12 @@ class Hangman {
     winOrLose() {
         if (!this.lives) {
             console.log('Game Over');
+            inputLtr.placeholder = 'Sorry, you lose!';
             return true;
         }
         if (!this.ltrCount) {
             console.log('You win');
+            inputLtr.placeholder = 'Congrats, you win!';
             return true;
         }
         return false;
@@ -79,9 +84,7 @@ function start(newHangman) {
     const displayWord = document.querySelector('#display-word');
     const displayLetters = document.querySelector('#display-letters');
     const inputForm = document.querySelector('#input-form');
-    // Child div's of #input-form
-    const inputLtr = document.querySelector('#input-ltr');
-    const buttonSub = document.querySelector('#button-sub');
+    
     const pError = document.querySelector('#p-error');
     // Restart div and button
     const restartDiv = document.querySelector('#restart-div');
@@ -94,6 +97,9 @@ function start(newHangman) {
     const player = newHangman;
     const currSplitWord = player.phraseArray();
     const currLetterObj = player.letterObj();
+
+    // Create ltr Box
+    ltrBox();
 
     // For each letter in the word array it creates span tags
     currSplitWord.forEach(ltr => {
@@ -196,4 +202,17 @@ function start(newHangman) {
         // console.log('After delete:', player);
         window.location.reload(true);
     });
+
+    function ltrBox() {
+        let ltrs = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        ltrs.forEach(ele => {
+            const p = document.createElement('span');
+            p.classList.add('letters');
+            p.style.backgroundImage = `url(assets/ice_${ele}.svg)`;
+            p.addEventListener
+            displayLetters.appendChild(p);
+
+        })
+    }
 }
+
