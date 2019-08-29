@@ -1,9 +1,14 @@
-// Choice of words
-const words = ['amuse', 'lazy', 'steam', 'ugly', 'scent', 'separate', 'vast', 'quiver', 'average', 'seashore', 'pray', 'descriptive', 'grumpy', 'knot', 'reaction', 'voiceless', 'carve', 'front', 'ground', 'evanescent', 'reason', 'judicious', 'earthquake', 'desert', 'educated', 'distance', 'waiting', 'trucks', 'scatter', 'chop', 'annoying', 'puzzling', 'close', 'animated', 'elbow', 'fretful', 'towering', 'satisfying', 'momentous', 'sore', 'animal', 'puzzled', 'fair', 'windy', 'quickest', 'stocking', 'wobble', 'beg', 'craven', 'border', 'round', 'moan', 'reproduce', 'stormy', 'unnatural', 'table', 'brother', 'violet', 'appreciate', 'overjoyed', 'actor', 'rightful', 'feeling', 'somber', 'safe', 'form', 'brief', 'crazy', 'cows', 'found', 'cattle', 'dynamic', 'majestic', 'contain', 'week', 'magical', 'gullible', 'adamant', 'file', 'cobweb', 'best', 'assorted', 'tasteful', 'nippy', 'secret', 'flavor', 'match', 'magic', 'few', 'different', 'ajar', 'idea', 'settle', 'plain', 'oatmeal', 'humdrum', 'romantic', 'bolt', 'juicy', 'obsequious', 'awake', 'robin', 'observe', 'mundane', 'mute', 'mighty', 'worried', 'chalk', 'strong', 'metal', 'manage', 'aboard', 'extend', 'verse', 'icicle', 'sharp', 'illegal', 'drip', 'lewd', 'perfect', 'shocking', 'branch', 'hot', 'polite', 'calculate', 'park', 'mate', 'handle', 'planes', 'rough', 'rabbit', 'belong', 'office', 'protect', 'free', 'driving', 'toothpaste', 'chubby', 'tall', 'loutish', 'shake', 'imported', 'hungry', 'camera', 'puny', 'building', 'present', 'rock', 'cycle', 'impress', 'vigorous', 'ready', 'card', 'argue', 'clam', 'scarce', 'person', 'wiry', 'guide', 'include', 'thankful', 'adorable', 'arch', 'sincere', 'earthy', 'elfin', 'silent', 'disarm', 'wish', 'unpack', 'honey', 'chunky', 'suspend', 'mature', 'needy', 'omniscient', 'devilish', 'tree', 'grass', 'narrow', 'pizzas', 'design', 'ragged', 'sheet', 'needle', 'rot', 'ticket', 'ship', 'fill', 'rule', 'lame', 'heal', 'greet', 'temper', 'gamy', 'quiet', 'trap', 'rhetorical', 'wing', 'dead'];
-// Class for an instance of Hangman
+// Random word library
+const randomWords = require('random-words');
+
+let ranWord = randomWords();
+while (ranWord.length < 5) {
+    ranWord = randomWords();
+}
 
 const inputLtr = document.querySelector('#input-ltr');
 
+// Class for an instance of Hangman
 class Hangman {
     constructor(words) {
         this.words = words;
@@ -29,7 +34,7 @@ class Hangman {
         for (let i = 0; i < words.length; i++) {
             words[i] === ' ' ? null : obj[words[i]].push(i);
         }
-        // console.log('Object after index #\'s of word array: \n', obj);
+        console.log('Object after index #\'s of word array: \n', obj);
         return obj;
     }
     winOrLose() {
@@ -47,7 +52,7 @@ class Hangman {
     }
 }
 
-start(new Hangman(words[Math.floor(Math.random() * 200)].toUpperCase()));
+start(new Hangman(ranWord));
 
 // FUNCTION THAT STARTS THE GAME
 function start(newHangman) {
@@ -57,18 +62,18 @@ function start(newHangman) {
         Howler
     } = require('howler');
 
-    // const sound = new Howl({
-    //     src: ['./sounds/without_god.mp3'],
-    //     autoplay: true,
-    //     loop: true,
-    //     volume: 0.3,
-    //     onend: function () {
-    //         console.log('Again!');
-    //     }
-    // });
+    const sound = new Howl({
+        src: ['./sounds/without_god.mp3'],
+        autoplay: true,
+        loop: true,
+        volume: 0.5,
+        onend: function () {
+            console.log('Again!');
+        }
+    });
 
 
-    // sound.play();
+    sound.play();
 
 
     // ALL QUERY SELECTORS
@@ -82,7 +87,7 @@ function start(newHangman) {
     const rightScreen = document.querySelector('#right-screen');
     // Child div's of #right-screen
     const displayWord = document.querySelector('#display-word');
-    const displayLetters = document.querySelector('#display-letters');
+    let displayLetters = document.querySelector('#display-letters');
     const inputForm = document.querySelector('#input-form');
     
     const pError = document.querySelector('#p-error');
@@ -119,6 +124,9 @@ function start(newHangman) {
     const checkLetter = (char = inputLtr.value.toUpperCase()) => {
         const ltr = char;
         let error = false;
+
+        // const ltrTag = document.querySelector(`span[data-ltr = '${ltr}']`);
+        
 
         if (player.words.length === ltr.length) {
             if (player.words === ltr) {
@@ -175,7 +183,10 @@ function start(newHangman) {
             window.removeEventListener('keydown', windowKeyDown);
             restartDiv.style.display = "block";
         };
+        ltrBoxTag(ltr); // Error with the click event #1
     }
+
+    
 
     function inputKeyDown(e) {
         e.stopImmediatePropagation();
@@ -187,6 +198,19 @@ function start(newHangman) {
     function windowKeyDown(e) {
         if (e.keyCode >= 65 && e.keyCode <= 90) {
             checkLetter(e.key.toUpperCase());
+        }
+    }
+
+    function ltrBoxTag(ltr) {
+        const tag = document.querySelector(`span[data-ltr = '${ltr}']`);
+        tag.parentElement.removeChild(tag);
+    }
+
+    function ltrBoxRemover(e) {
+        if (e.target.nodeName === 'SPAN') {
+            const ltrClicked = e.target.dataset.ltr.toUpperCase();
+            checkLetter(ltrClicked);
+            ltrBoxTag(ltrClicked);
         }
     }
 
@@ -209,10 +233,14 @@ function start(newHangman) {
             const p = document.createElement('span');
             p.classList.add('letters');
             p.style.backgroundImage = `url(assets/ice_${ele}.svg)`;
-            p.addEventListener
+            p.setAttribute("data-ltr", `${ele}`);
+            // p.addEventListener
             displayLetters.appendChild(p);
-
+            // console.log(p.dataset.ltr);
         })
     }
+    displayLetters = document.querySelector('#display-letters');
+    displayLetters.addEventListener('click', (e) => {
+        ltrBoxRemover(e) // Error with removing element after typing #1
+    })
 }
-

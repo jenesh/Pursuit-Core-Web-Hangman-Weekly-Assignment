@@ -134,7 +134,7 @@ input:hover {
     background: rgb(235, 84, 84);
     transform: scale(1.01);
     transition: all .25s ease-in;
-    transform: translate(2px, -5px);
+    /* transform: translate(2px, -5px); */
     box-shadow: -3px 3px 3px -2px gray;
     text-shadow: -1px 1px 3px gray;
 }
@@ -154,11 +154,12 @@ input:hover {
 .letters:hover {
     /* transform: scale(1.04); */
     transition: all .5s ease;
-    border-radius: 40%;
-    box-shadow: 0 0 10px 1px green;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 1px rgb(240, 240, 240);
     
 }
 .letters:active{
-    transform: scale(.98);
+    transform: scale(.9);
     transition: all .4s ease;
+    box-shadow: 0 0 10px 1px rgb(227, 68, 68);
 }
