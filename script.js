@@ -57,23 +57,23 @@ start(new Hangman(ranWord));
 // FUNCTION THAT STARTS THE GAME
 function start(newHangman) {
     // Audio script
-    const {
-        Howl,
-        Howler
-    } = require('howler');
+    // const {
+    //     Howl,
+    //     Howler
+    // } = require('howler');
 
-    const sound = new Howl({
-        src: ['./sounds/without_god.mp3'],
-        autoplay: true,
-        loop: true,
-        volume: 0.5,
-        onend: function () {
-            console.log('Again!');
-        }
-    });
+    // const sound = new Howl({
+    //     src: ['./sounds/without_god.mp3'],
+    //     autoplay: true,
+    //     loop: true,
+    //     volume: 0.5,
+    //     onend: function () {
+    //         console.log('Again!');
+    //     }
+    // });
 
 
-    sound.play();
+    // sound.play();
 
 
     // ALL QUERY SELECTORS
