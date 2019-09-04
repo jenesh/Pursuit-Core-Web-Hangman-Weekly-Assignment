@@ -63,7 +63,7 @@ function start(newHangman) {
     // } = require('howler');
 
     // const sound = new Howl({
-    //     src: ['./sounds/without_god.mp3'],
+    //     src: ['./sounds/nujabes.mp3'],
     //     autoplay: true,
     //     loop: true,
     //     volume: 0.5,
@@ -127,7 +127,6 @@ function start(newHangman) {
 
         // const ltrTag = document.querySelector(`span[data-ltr = '${ltr}']`);
         
-
         if (player.words.length === ltr.length) {
             if (player.words === ltr) {
                 for (let i = 0; i < spanTags.length; i++) {

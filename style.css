@@ -11,30 +11,36 @@ html, body {
 #root {
     height: 100vh;
     padding: 0;
-    background: gray;
+    background: url('assets/bg.png');
+    background-size: 1600px 912px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 #header {
     color: rgb(106, 93, 223);
     height: 20%;
-    background: rgb(252, 249, 108);
+    /* background: rgb(252, 249, 108); */
     margin: 0;
     padding: 0;
     text-align: center;
     display: flex;
     justify-content: center;
+    font-family: 'Carter One', cursive;
+    letter-spacing: 10px;
 }
 #main {
-    background: rgb(209, 160, 55);
+    /* background: rgb(209, 160, 55); */
     display: flex;
     height: calc(100% - 20%);
 }
 #left-screen {
     width: 50%;
-    background: rgb(53, 233, 62);
+    /* background: rgb(53, 233, 62); */
 }
 #right-screen {
     width: 50%;
-    background: rgb(33, 198, 248);
+    /* background: rgb(33, 198, 248); */
     display: block;
     text-align: center;
 }
@@ -47,9 +53,10 @@ html, body {
     color: white;
 }
 #display-letters {
-    height: 50%;
-    margin: 5px;
-    border: 1px solid black;
+    /* height: 60%; */
+    width: 80%;
+    margin: auto;
+    /* border: 1px solid black; */
     padding: 5px;
     display: flex;
     flex-wrap: wrap;
@@ -79,11 +86,8 @@ html, body {
 .span-spacing:first-of-type {
     text-transform: capitalize;
 }
-.div-word {
-    /* width: fit-content; */
-}
 .hide {
-    color: rgb(33, 198, 248);
+    color: rgba(0, 0, 0, 0);
 }
 .show {
     display: block;
@@ -144,8 +148,8 @@ input:hover {
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    height: 70px;
-    width: 70px;
+    height: 5vw;
+    width: 5vw;
     transition: all .4s ease;
     background-color: white;
     box-shadow: none;
@@ -154,9 +158,11 @@ input:hover {
 .letters:hover {
     /* transform: scale(1.04); */
     transition: all .5s ease;
-    border-radius: 50%;
-    box-shadow: 0 0 10px 1px rgb(240, 240, 240);
-    
+    /* border-radius: 50%; */
+    /* box-shadow: 0 0 10px 3px #e07c55; */
+    /* position: relative;
+    bottom: 5px; */
+    transform: translate(0px,-5px) scale(1.1);
 }
 .letters:active{
     transform: scale(.9);
